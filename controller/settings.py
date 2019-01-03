@@ -109,3 +109,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR,'static')
+
+
+JET_DEFAULT_THEME = 'light-gray'
+JET_SIDE_MENU_COMPACT = True
