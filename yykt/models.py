@@ -21,3 +21,22 @@ class CourseCategoty(models.Model):
     class Meta:
         verbose_name_plural = '类别'
         verbose_name = '类别'
+
+class Tag(models.Model):
+    tag = models.CharField('标签', max_length=16, unique=True, error_messages={'unique':'这个标签已存在'})
+    createTime = models.DateTimeField('创建时间',auto_now_add=True)
+    updateTime = models.DateTimeField('更新时间', auto_now=True)
+    
+
+    def __str__(self):
+        return self.tag
+    
+    def __unicode__(self):
+        return self.tag
+    
+    def toDict(self):
+        return {'tag': self.tag}
+    
+    class Meta:
+        verbose_name_plural = '标签'
+        verbose_name = '标签'
