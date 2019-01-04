@@ -1,4 +1,5 @@
 .vscode/
 *.pyc
 .DS_Store
-*.sqlite3
+yykt.sqlite3
+migrations/
