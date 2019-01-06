@@ -120,6 +120,29 @@ class Audio(models.Model):
     class Meta:
         verbose_name = '音频课程'
         verbose_name_plural = verbose_name
+
+class User(models.Model):
+    phone = models.CharField('手机号码',max_length=11, unique=True, error_messages={'unique':'这个用户已存在'})
+    password = models.CharField('密码',max_length=256)
+    nickName = models.CharField('昵称',max_length=16,null=True,blank=True)
+    realName = models.CharField('真实姓名',max_length=16,null=True,blank=True)
+    uniqueId = models.CharField('微信唯一标识',max_length=256,null=True,blank=True)
+    wechatNum = models.CharField('微信号',max_length=16,null=True,blank=True)
+    childName = models.CharField('子女姓名',max_length=8,null=True,blank=True)
+    childSex = models.CharField('子女性别',max_length=1,null=True,blank=True)
+    birthday = models.DateField('出生年月')
+    createTime = models.DateTimeField('创建时间',auto_now_add=True)
+    updateTime = models.DateTimeField('更新时间', auto_now=True)
+
+    def __str__(self):
+        return self.phone
     
+    def __unicode__(self):
+        return self.phone
+    
+    class Meta:
+        verbose_name = '用户'
+        verbose_name_plural = verbose_name
+ 
 
 
