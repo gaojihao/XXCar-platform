@@ -49,26 +49,6 @@ class Tag(models.Model):
         verbose_name_plural = verbose_name
         db_table = 'category'
 
-class Video(models.Model):
-    name = models.CharField('名称',max_length=32, unique=True, error_messages={'unique':'这个视频已存在'})
-    course = models.ForeignKey(Course,verbose_name='课程名称')
-    
-    filePath = models.FileField(upload_to='upload',verbose_name='视频上传',unique=True,error_messages={'unique':'这个视频已存在'})
-
-    createTime = models.DateTimeField('创建时间',auto_now_add=True)
-    updateTime = models.DateTimeField('更新时间', auto_now=True)
-
-    def __str__(self):
-        return self.name
-    
-    def __unicode__(self):
-        return self.name
-    
-    class Meta:
-        verbose_name = '视频课程'
-        verbose_name_plural = verbose_name
-
-
 class Course(models.Model):
 
     SALE_CHOICES = (
@@ -102,6 +82,44 @@ class Course(models.Model):
         verbose_name = '标签'
         verbose_name_plural = verbose_name
 
+
+class Video(models.Model):
+    name = models.CharField('名称',max_length=32, unique=True, error_messages={'unique':'这个视频已存在'})
+    course = models.ForeignKey(Course,verbose_name='课程名称')
+    
+    filePath = models.FileField(upload_to='upload',verbose_name='视频上传',unique=True,error_messages={'unique':'这个视频已存在'})
+
+    createTime = models.DateTimeField('创建时间',auto_now_add=True)
+    updateTime = models.DateTimeField('更新时间', auto_now=True)
+
+    def __str__(self):
+        return self.name
+    
+    def __unicode__(self):
+        return self.name
+    
+    class Meta:
+        verbose_name = '视频课程'
+        verbose_name_plural = verbose_name
+
+class Audio(models.Model):
+    name = models.CharField('名称',max_length=32, unique=True, error_messages={'unique':'这个音频已存在'})
+    course = models.ForeignKey(Course,verbose_name='课程名称')
+    
+    filePath = models.FileField(upload_to='upload',verbose_name='音频上传',unique=True,error_messages={'unique':'这个音频已存在'})
+
+    createTime = models.DateTimeField('创建时间',auto_now_add=True)
+    updateTime = models.DateTimeField('更新时间', auto_now=True)
+
+    def __str__(self):
+        return self.name
+    
+    def __unicode__(self):
+        return self.name
+    
+    class Meta:
+        verbose_name = '音频课程'
+        verbose_name_plural = verbose_name
     
 
 
