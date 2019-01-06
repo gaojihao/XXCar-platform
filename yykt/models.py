@@ -196,5 +196,19 @@ class Like(models.Model):
         verbose_name = '喜欢'
         verbose_name_plural = verbose_name
 
+class Banner(models.Model):
+    course = models.ForeignKey(Course,verbose_name='课程名称')
+    createTime = models.DateTimeField('创建时间',auto_now_add=True)
+    updateTime = models.DateTimeField('更新时间', auto_now=True)
+
+    def __str__(self):
+        return self.course.name
+    
+    def __unicode__(self):
+        return self.course.name
+    
+    class Meta:
+        verbose_name = '广告位'
+        verbose_name_plural = verbose_name
 
 
