@@ -26,10 +26,35 @@ class CourseAdmin(admin.ModelAdmin):
 
 
 class UserAdmin(admin.ModelAdmin):
-    actions = None
     list_display = ['phone','nickName','realName','wechatNum','childName','birthday']
     readonly_fields = ('phone','password','nickName','realName','uniqueId','wechatNum','childName','birthday','childSex')
-    
+
+    def has_add_permission(self,request):
+        return False
+
+class CollectAdmin(admin.ModelAdmin):
+    list_display = ['course','user','createTime','updateTime']
+    readonly_fields = ('course','user','createTime','updateTime')
+
+    def has_add_permission(self,request):
+        return False
+
+class LikeAdmin(admin.ModelAdmin):
+    list_display = ['course','user','createTime','updateTime']
+    readonly_fields = ('course','user','createTime','updateTime')
+
+    def has_add_permission(self,request):
+        return False
+
+class CommentAdmin(admin.ModelAdmin):
+    list_display = ['course','user','comment','level']
+    readonly_fields = ('course','user','comment','level')
+
+    def has_add_permission(self,request):
+        return False
+
+class BannerAdmin(admin.ModelAdmin):
+    pass
 
 
 admin.site.register(CourseCategoty)
@@ -38,9 +63,9 @@ admin.site.register(Course,CourseAdmin)
 admin.site.register(Video)
 admin.site.register(Audio)
 admin.site.register(User,UserAdmin)
-admin.site.register(Collect)
-admin.site.register(Like)
-admin.site.register(Comment)
-admin.site.register(Banner)
+admin.site.register(Collect,CollectAdmin)
+admin.site.register(Like,LikeAdmin)
+admin.site.register(Comment,CommentAdmin)
+admin.site.register(Banner,BannerAdmin)
 admin.site.register(Article,MarkdownxModelAdmin)
 
