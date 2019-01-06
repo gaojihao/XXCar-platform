@@ -180,4 +180,21 @@ class Collect(models.Model):
         verbose_name_plural = verbose_name
 
 
+class Like(models.Model):
+    course = models.ForeignKey(Course,verbose_name='课程名称')
+    user = models.ForeignKey(User,verbose_name='用户')
+    createTime = models.DateTimeField('创建时间',auto_now_add=True)
+    updateTime = models.DateTimeField('更新时间', auto_now=True)
+
+    def __str__(self):
+        return self.course.name
+    
+    def __unicode__(self):
+        return self.course.name
+    
+    class Meta:
+        verbose_name = '喜欢'
+        verbose_name_plural = verbose_name
+
+
 
