@@ -12,19 +12,32 @@ admin.site.site_url = ''
 
 admin.site.disable_action('delete_selected')
 
-class CourseCategotyAdmin(admin.ModelAdmin):
-    list_display = ['name']
+class CourseAdmin(admin.ModelAdmin):
+    list_display = ['name','category','status','price','studyPeople']
+    #list_per_page设置每页显示多少条记录，默认是100条
+    list_per_page = 50
+    #筛选器
+    list_filter =('category', 'status', 'level') #过滤器
+    search_fields =('name', 'category') #搜索字段
+    date_hierarchy = 'createTime'    #筛选
 
-class TagAdmin(admin.ModelAdmin):
-    list_display = ['tag']
+    #list_editable 设置默认可编辑字段
+    #list_editable = ['status', 'price']
 
 
-admin.site.register(CourseCategoty,CourseCategotyAdmin)
-admin.site.register(Tag,TagAdmin)
-admin.site.register(Course)
+class UserAdmin(admin.ModelAdmin):
+    actions = None
+    list_display = ['phone','nickName','realName','wechatNum','childName','birthday']
+    readonly_fields = ('phone','password','nickName','realName','uniqueId','wechatNum','childName','birthday','childSex')
+    
+
+
+admin.site.register(CourseCategoty)
+admin.site.register(Tag)
+admin.site.register(Course,CourseAdmin)
 admin.site.register(Video)
 admin.site.register(Audio)
-admin.site.register(User)
+admin.site.register(User,UserAdmin)
 admin.site.register(Collect)
 admin.site.register(Like)
 admin.site.register(Comment)
