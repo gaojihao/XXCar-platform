@@ -38,5 +38,7 @@ class Tag(models.Model):
         return {'tag': self.tag}
     
     class Meta:
-        verbose_name_plural = '标签'
         verbose_name = '标签'
+        verbose_name_plural = verbose_name
+        db_table = 'category'
+        
