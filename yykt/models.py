@@ -49,19 +49,59 @@ class Tag(models.Model):
         verbose_name_plural = verbose_name
         db_table = 'category'
 
+class Video(models.Model):
+    name = models.CharField('名称',max_length=32, unique=True, error_messages={'unique':'这个视频已存在'})
+    course = models.ForeignKey(Course,verbose_name='课程名称')
+    
+    filePath = models.FileField(upload_to='upload',verbose_name='视频上传',unique=True,error_messages={'unique':'这个视频已存在'})
+
+    createTime = models.DateTimeField('创建时间',auto_now_add=True)
+    updateTime = models.DateTimeField('更新时间', auto_now=True)
+
+    def __str__(self):
+        return self.name
+    
+    def __unicode__(self):
+        return self.name
+    
+    class Meta:
+        verbose_name = '视频课程'
+        verbose_name_plural = verbose_name
+
+
 class Course(models.Model):
+
+    SALE_CHOICES = (
+        (True, u'上架'),
+        (False, u'下架'),
+    )
+
     name = models.CharField('课程名称',max_length=32, unique=True, error_messages={'unique':'这个课程已存在'})
-    type= models.IntegerField('类型',choices=COURSE_FORMAT_CHOICES,max_length=1,default=0)
+    courseType= models.IntegerField('类型',choices=COURSE_FORMAT_CHOICES,default=0)
     introdcution = models.CharField('课程介绍',max_length=128,blank=True,null=True)
     originPrice = models.IntegerField('原价',default=0)
     price = models.IntegerField('价格',default=0)
     category = models.ForeignKey(CourseCategoty,verbose_name='课程类别')
     filePath = models.ImageField(upload_to='upload',verbose_name='封面上传')
     tag = models.ManyToManyField(Tag,verbose_name='标签')
+    status= models.BooleanField('上下架',choices=SALE_CHOICES,default=True)
     likes = models.IntegerField('喜欢',default=0,editable=False)
     collect = models.IntegerField('收藏',default=0,editable=False)
+    studyPeople = models.IntegerField('学习人数',default=0,editable=False)
+    level = models.FloatField('评分',default=5.0,editable=False)
     createTime = models.DateTimeField('创建时间',auto_now_add=True)
     updateTime = models.DateTimeField('更新时间', auto_now=True)
+
+    def __str__(self):
+        return self.name
+    
+    def __unicode__(self):
+        return self.name
+    
+    class Meta:
+        verbose_name = '标签'
+        verbose_name_plural = verbose_name
+
     
 
 
