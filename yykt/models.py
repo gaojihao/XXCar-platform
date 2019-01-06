@@ -4,12 +4,6 @@ from __future__ import unicode_literals
 from django.db import models
 from markdownx.models import MarkdownxField
 
-COURSE_FORMAT_CHOICES = (
-    (0, u'视频'),
-    (1, u'音频'),
-    (3, u'文章'),
-)
-
 
 class CourseCategoty(models.Model):
     name = models.CharField('类别', max_length=16, unique=True, error_messages={'unique':'这个分类已存在'})
@@ -55,6 +49,12 @@ class Course(models.Model):
     SALE_CHOICES = (
         (True, u'上架'),
         (False, u'下架'),
+    )
+
+    COURSE_FORMAT_CHOICES = (
+    (0, u'视频'),
+    (1, u'音频'),
+    (3, u'文章'),
     )
 
     name = models.CharField('课程名称',max_length=32, unique=True, error_messages={'unique':'这个课程已存在'})

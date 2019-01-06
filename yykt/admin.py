@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 
 from django.contrib import admin
 from models import *
-from markdownx.admin import MarkdownxModelAdmin
+from markdownx.admin import AdminMarkdownxWidget
 
 admin.site.site_header = 'xx课堂'
 admin.site.site_title = 'zz系统'
@@ -53,19 +53,32 @@ class CommentAdmin(admin.ModelAdmin):
     def has_add_permission(self,request):
         return False
 
+class VideoAdmin(admin.ModelAdmin):
+    list_display = ['name','course','createTime','updateTime']
+    
+
+class AudioAdmin(admin.ModelAdmin):
+    list_display = ['name','course','createTime','updateTime']
+    
+
 class BannerAdmin(admin.ModelAdmin):
     pass
+
+class ArticleAdmin(admin.ModelAdmin):
+    formfield_overrides = {
+        MarkdownxField: {'widget': AdminMarkdownxWidget}
+    }
 
 
 admin.site.register(CourseCategoty)
 admin.site.register(Tag)
+admin.site.register(Article,ArticleAdmin)
 admin.site.register(Course,CourseAdmin)
-admin.site.register(Video)
-admin.site.register(Audio)
+admin.site.register(Video,VideoAdmin)
+admin.site.register(Audio,AudioAdmin)
 admin.site.register(User,UserAdmin)
 admin.site.register(Collect,CollectAdmin)
 admin.site.register(Like,LikeAdmin)
 admin.site.register(Comment,CommentAdmin)
 admin.site.register(Banner,BannerAdmin)
-admin.site.register(Article,MarkdownxModelAdmin)
 
