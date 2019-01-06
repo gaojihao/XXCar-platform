@@ -143,6 +143,41 @@ class User(models.Model):
     class Meta:
         verbose_name = '用户'
         verbose_name_plural = verbose_name
- 
+
+class Comment(models.Model):
+    comment = models.CharField('内容',max_length=256)
+    level = models.FloatField('评分',default=5.0,editable=False)
+    course = models.ForeignKey(Course,verbose_name='课程名称')
+    user = models.ForeignKey(User,verbose_name='评论人')
+    createTime = models.DateTimeField('创建时间',auto_now_add=True)
+    updateTime = models.DateTimeField('更新时间', auto_now=True)
+
+    def __str__(self):
+        return self.comment
+    
+    def __unicode__(self):
+        return self.comment
+    
+    class Meta:
+        verbose_name = '评论'
+        verbose_name_plural = verbose_name
+
+
+class Collect(models.Model):
+    course = models.ForeignKey(Course,verbose_name='课程名称')
+    user = models.ForeignKey(User,verbose_name='用户')
+    createTime = models.DateTimeField('创建时间',auto_now_add=True)
+    updateTime = models.DateTimeField('更新时间', auto_now=True)
+
+    def __str__(self):
+        return self.course.name
+    
+    def __unicode__(self):
+        return self.course.name
+    
+    class Meta:
+        verbose_name = '收藏'
+        verbose_name_plural = verbose_name
+
 
 
