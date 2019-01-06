@@ -11,6 +11,7 @@ import settings
 urlpatterns = [
     url(r'^jet/', include('jet.urls', 'jet')),  # Django JET URLS
     url(r'^admin/', admin.site.urls),
+    url(r'^markdownx/', include('markdownx.urls')),
 ]
 
 

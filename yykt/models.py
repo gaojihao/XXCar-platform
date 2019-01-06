@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 
 from django.db import models
+from markdownx.models import MarkdownxField
 
 COURSE_FORMAT_CHOICES = (
     (0, u'视频'),
@@ -65,8 +66,8 @@ class Course(models.Model):
     filePath = models.ImageField(upload_to='upload',verbose_name='封面上传')
     tag = models.ManyToManyField(Tag,verbose_name='标签')
     status= models.BooleanField('上下架',choices=SALE_CHOICES,default=True)
-    likes = models.IntegerField('喜欢',default=0,editable=False)
-    collect = models.IntegerField('收藏',default=0,editable=False)
+    likeNum = models.IntegerField('喜欢',default=0,editable=False)
+    collectNum = models.IntegerField('收藏',default=0,editable=False)
     studyPeople = models.IntegerField('学习人数',default=0,editable=False)
     level = models.FloatField('评分',default=5.0,editable=False)
     createTime = models.DateTimeField('创建时间',auto_now_add=True)
@@ -79,9 +80,8 @@ class Course(models.Model):
         return self.name
     
     class Meta:
-        verbose_name = '标签'
+        verbose_name = '课程'
         verbose_name_plural = verbose_name
-
 
 class Video(models.Model):
     name = models.CharField('名称',max_length=32, unique=True, error_messages={'unique':'这个视频已存在'})
@@ -119,6 +119,22 @@ class Audio(models.Model):
     
     class Meta:
         verbose_name = '音频课程'
+        verbose_name_plural = verbose_name
+
+class Article(models.Model):
+    title = models.CharField('标题',max_length=32, unique=True, error_messages={'unique':'这篇文章已存在'})
+    myfield = MarkdownxField()
+    createTime = models.DateTimeField('创建时间',auto_now_add=True)
+    updateTime = models.DateTimeField('更新时间', auto_now=True)
+
+    def __str__(self):
+        return self.title
+    
+    def __unicode__(self):
+        return self.title
+    
+    class Meta:
+        verbose_name = '文章'
         verbose_name_plural = verbose_name
 
 class User(models.Model):
@@ -162,7 +178,6 @@ class Comment(models.Model):
         verbose_name = '评论'
         verbose_name_plural = verbose_name
 
-
 class Collect(models.Model):
     course = models.ForeignKey(Course,verbose_name='课程名称')
     user = models.ForeignKey(User,verbose_name='用户')
@@ -178,7 +193,6 @@ class Collect(models.Model):
     class Meta:
         verbose_name = '收藏'
         verbose_name_plural = verbose_name
-
 
 class Like(models.Model):
     course = models.ForeignKey(Course,verbose_name='课程名称')
