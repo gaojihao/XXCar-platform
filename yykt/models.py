@@ -21,8 +21,9 @@ class CourseCategoty(models.Model):
         return {'name': self.name}
     
     class Meta:
-        verbose_name_plural = '类别'
-        verbose_name = '类别'
+        verbose_name = '分类管理'
+        verbose_name_plural = verbose_name
+        
 
 class Tag(models.Model):
     tag = models.CharField('标签', max_length=16, unique=True, error_messages={'unique':'这个标签已存在'})
@@ -40,7 +41,7 @@ class Tag(models.Model):
         return {'tag': self.tag}
     
     class Meta:
-        verbose_name = '标签'
+        verbose_name = '标签管理'
         verbose_name_plural = verbose_name
         db_table = 'category'
 
@@ -80,7 +81,7 @@ class Course(models.Model):
         return self.name
     
     class Meta:
-        verbose_name = '课程'
+        verbose_name = '课程管理'
         verbose_name_plural = verbose_name
 
 class Video(models.Model):
@@ -134,7 +135,7 @@ class Article(models.Model):
         return self.title
     
     class Meta:
-        verbose_name = '文章'
+        verbose_name = '文章管理'
         verbose_name_plural = verbose_name
 
 class User(models.Model):
@@ -157,7 +158,7 @@ class User(models.Model):
         return self.phone
     
     class Meta:
-        verbose_name = '用户'
+        verbose_name = '用户管理'
         verbose_name_plural = verbose_name
 
 class Comment(models.Model):
@@ -175,7 +176,7 @@ class Comment(models.Model):
         return self.comment
     
     class Meta:
-        verbose_name = '评论'
+        verbose_name = '用户评论'
         verbose_name_plural = verbose_name
 
 class Collect(models.Model):
@@ -191,7 +192,7 @@ class Collect(models.Model):
         return self.course.name
     
     class Meta:
-        verbose_name = '收藏'
+        verbose_name = '用户收藏'
         verbose_name_plural = verbose_name
 
 class Like(models.Model):
@@ -207,7 +208,7 @@ class Like(models.Model):
         return self.course.name
     
     class Meta:
-        verbose_name = '喜欢'
+        verbose_name = '用户喜欢'
         verbose_name_plural = verbose_name
 
 class Banner(models.Model):
