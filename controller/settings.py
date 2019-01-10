@@ -28,6 +28,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'markdownx',
     'yykt',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
