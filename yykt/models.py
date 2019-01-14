@@ -59,6 +59,8 @@ class Course(models.Model):
     )
 
     name = models.CharField('课程名称',max_length=32, unique=True, error_messages={'unique':'这个课程已存在'})
+    sunTitle = models.CharField('子标题',max_length=64,blank=True,null=True)
+    des = models.TextField('描述',blank=True,null=True)
     courseType= models.IntegerField('类型',choices=COURSE_FORMAT_CHOICES,default=0)
     introdcution = models.CharField('课程介绍',max_length=128,blank=True,null=True)
     originPrice = models.IntegerField('原价',default=0)
