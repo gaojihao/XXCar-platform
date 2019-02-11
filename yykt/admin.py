@@ -24,7 +24,7 @@ class CourseAdmin(admin.ModelAdmin):
     readonly_fields = ['filePath_data']
 
     def filePath_data(self, obj):
-        return mark_safe('<img src="%s" width="100px" height="60px"/>' % ('http://127.0.0.1:8000'+obj.filePath.url))
+        return mark_safe('<img src="%s" width="100px" height="60px"/>' % obj.filePath.url)
     filePath_data.short_description = '封面图片'
 
 

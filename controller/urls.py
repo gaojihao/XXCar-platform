@@ -13,14 +13,3 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^markdownx/', include('markdownx.urls')),
 ]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-
-urlpatterns += [
-    url(r'^upload/(?P<path>.*)$',serve, {'document_root': 'upload', 'show_indexes':True}),
-]
-
-
-
-if settings.DEBUG is False:
-    urlpatterns += [
-        url(r'^static/(?P<path>.*)$',serve, {'document_root': settings.STATIC_ROOT, }),
-    ]

@@ -113,7 +113,7 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR,'static')
 
 MEDIA_URL='/uploads/'
-MEDIA_ROOT=os.path.join(BASE_DIR, 'uploads')
+MEDIA_ROOT=os.path.join(BASE_DIR, 'upload')
 
 JET_DEFAULT_THEME = 'default'
 JET_SIDE_MENU_COMPACT = True
